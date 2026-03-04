@@ -1,0 +1,75 @@
+# network_params.yaml — Network Topology Parameters
+# Calibrated from BI payment system data
+
+systems:
+  rtgs:
+    n_participants: 140
+    target_avg_degree: 74.07       # Jan-25 actual
+    target_avg_koneksi: 4565       # Jan-25 actual
+    core_bank_fraction: 0.13       # ~15% core banks
+    n_core_banks: 18
+    weight_distribution:
+      type: lognormal
+      mu: 10.0                     # ln(IDR 22T)
+      sigma: 2.5
+    avg_daily_transactions: 50000
+    operating_hours_start: 360     # 06:00 (minutes from midnight)
+    operating_hours_end: 1020      # 17:00
+    zona1_cutoff: 600              # 10:00
+    zona2_cutoff: 840              # 14:00
+    system_capacity: 200000        # Max txn/day
+
+  fast:
+    n_participants: 80
+    target_avg_degree: 80.0        # Jan-25 actual
+    core_bank_fraction: 0.17       # ~17% core
+    n_core_banks: 14
+    weight_distribution:
+      type: lognormal
+      mu: 8.5                      # Smaller amounts (retail)
+      sigma: 2.0
+    avg_daily_transactions: 200000
+    operating_hours_start: 0       # 24/7
+    operating_hours_end: 1440
+    system_capacity: 1000000
+
+  raja:
+    n_participants: 70
+    target_avg_degree: 61.0        # Jan-25 actual
+    core_bank_fraction: 0.12
+    n_core_banks: 9
+    weight_distribution:
+      type: lognormal
+      mu: 11.5                     # Money market: larger amounts
+      sigma: 1.8
+    avg_daily_transactions: 5000
+    operating_hours_start: 480     # 08:00
+    operating_hours_end: 900       # 15:00
+    system_capacity: 50000
+
+# Bank tier characteristics
+bank_tiers:
+  core:
+    giro_initial_mean: 50e12       # IDR 50T
+    giro_initial_std: 20e12
+    credit_facility_mean: 10e12
+    payment_urgency: 0.8            # High urgency (pay earlier)
+    risk_appetite: 0.3              # Low risk appetite (hold liquidity)
+    avg_counterparties: 80          # Connected to many banks
+
+  periphery:
+    giro_initial_mean: 2e12        # IDR 2T
+    giro_initial_std: 1e12
+    credit_facility_mean: 0.5e12
+    payment_urgency: 0.5
+    risk_appetite: 0.6
+    avg_counterparties: 20
+
+# Topology generation
+topology:
+  model: "core_periphery_barabasi_albert"
+  core_periphery_density: 0.9     # Core-core connection density
+  core_periphery_connection: 0.4  # Core-periphery connection probability
+  periphery_periphery_density: 0.05
+  weight_correlation_with_degree: 0.7  # Higher degree → higher weights
+  min_edge_weight: 1e9            # IDR 1B minimum

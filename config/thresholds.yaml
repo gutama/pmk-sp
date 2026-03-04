@@ -1,0 +1,178 @@
+# thresholds.yaml — Implied Thresholds dari Heatmap BI Sub-Protokol SP
+# Direction: 'inc' = higher is riskier, 'dec' = lower is riskier
+# Referensi: Heatmap Subprotokol SP Slide #13
+
+risiko:
+  unsettled_banks:
+    direction: inc
+    waspada: 1
+    siaga: 5
+    krisis: 10
+    unit: "banks"
+    description: "Jumlah bank dengan transaksi gagal settle pada akhir hari"
+
+  average_degree:
+    direction: dec
+    waspada: 65.80
+    siaga: 63.18
+    krisis: 60.55
+    unit: "degree"
+    description: "Rata-rata derajat koneksi di jaringan pembayaran antar bank"
+
+  system_availability:
+    direction: dec
+    waspada: 97.00
+    siaga: 98.50
+    krisis: 99.975
+    unit: "%"
+    description: "Persentase waktu sistem operasional"
+
+kerentanan_velositas:
+  tor:
+    direction: inc
+    waspada: 1.36
+    siaga: 2.19
+    krisis: 3.03
+    unit: "ratio"
+    description: "Rasio total nilai transaksi terhadap rata-rata saldo giro bank"
+
+  tor_adj:
+    direction: inc
+    waspada: 1.36
+    siaga: 2.19
+    krisis: 3.03
+    unit: "ratio"
+    description: "TOR setelah disesuaikan dengan outlier dan seasonal"
+
+  queue_ratio:
+    direction: dec
+    waspada: 4.21
+    siaga: 3.98
+    krisis: 2.74
+    unit: "ratio"
+    description: "Rasio transaksi antrian terhadap total transaksi (lower = higher risk)"
+
+  throughput_zona3:
+    direction: inc
+    waspada: 40.0
+    siaga: 50.0
+    krisis: 60.0
+    unit: "%"
+    description: "Persentase transaksi yang settle di zona waktu terakhir (14:00-closing)"
+
+kerentanan_struktur:
+  awd:
+    direction: dec
+    waspada: 2.29
+    siaga: 2.14
+    krisis: 1.98
+    unit: "value"
+    description: "Rata-rata derajat berbobot (weighted by transaction value)"
+
+  avg_koneksi:
+    direction: dec
+    waspada: 4000
+    siaga: 3959
+    krisis: 3918
+    unit: "connections"
+    description: "Rata-rata jumlah koneksi aktif per peserta"
+
+  volatility_interconnectedness:
+    direction: inc
+    waspada: 243
+    siaga: 252
+    krisis: 280
+    unit: "index"
+    description: "Volatilitas indeks keterhubungan jaringan (rolling std)"
+
+kerentanan_infrastruktur:
+  incidents:
+    direction: inc
+    waspada: "RTO"
+    siaga: "MTPD"
+    krisis: ">MTPD"
+    unit: "category"
+    description: "Jumlah insiden terhadap benchmark pemulihan (RTO/MTPD)"
+
+  system_utilization:
+    direction: inc
+    waspada: 26.94
+    siaga: 27.99
+    krisis: 29.56
+    unit: "%"
+    description: "Persentase kapasitas sistem yang terpakai"
+
+pmkt_velositas:
+  unsettled_rtgs_dana:
+    direction: inc
+    waspada: 1
+    siaga: 5
+    krisis: 10
+    unit: "transactions"
+    description: "Unsettled trx BI-RTGS dana"
+
+  reject_fast_dana:
+    direction: inc
+    waspada: 1
+    siaga: 5
+    krisis: 10
+    unit: "transactions"
+    description: "Reject trx BI-FAST dana"
+
+pmkt_contagion:
+  avg_degree_rtgs:
+    direction: dec
+    waspada: 65.80
+    siaga: 63.18
+    krisis: 60.55
+    unit: "degree"
+    description: "Average Degree BI-RTGS"
+
+  avg_degree_fast:
+    direction: dec
+    waspada: 72.39
+    siaga: 68.32
+    krisis: 64.25
+    unit: "degree"
+    description: "Average Degree BI-FAST"
+
+  avg_degree_raja:
+    direction: dec
+    waspada: 64.49
+    siaga: 63.44
+    krisis: 62.39
+    unit: "degree"
+    description: "Average Degree RAJA"
+
+  availability_rtgs:
+    direction: dec
+    waspada: 99.95
+    siaga: 99.90
+    krisis: 99.975
+    unit: "%"
+    description: "System Availability BI-RTGS"
+
+pmkt_operational:
+  unsettled_rtgs_nondana:
+    direction: inc
+    waspada: 1
+    siaga: 5
+    krisis: 10
+    unit: "transactions"
+    description: "Unsettled trx BI-RTGS non-dana"
+
+  stability_index_provider_fast:
+    direction: dec
+    waspada: 99.95
+    siaga: 97.00
+    krisis: 95.00
+    unit: "index"
+    description: "Indeks Stabilitas Penyelenggara BI-FAST"
+
+  stability_index_participant_fast:
+    direction: dec
+    waspada: 99.95
+    siaga: 97.00
+    krisis: 95.00
+    unit: "index"
+    description: "Indeks Stabilitas Peserta BI-FAST"

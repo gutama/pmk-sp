@@ -1,0 +1,21 @@
+name: contagion_cascade
+description: "Bank failure triggers cascading settlement failures"
+expected_zone: krisis
+
+triggers:
+  failing_bank: top_5_by_degree    # One of the top 5 most connected banks
+  failure_mode: sudden_stop        # No outgoing payments
+  cascade_rounds: 3
+  onset_day: 5
+  loss_given_default: 0.60
+
+contagion:
+  propagation_rounds: 5
+  secondary_failure_threshold: 0.20  # Banks with >20% exposure fail
+  liquidity_freeze_multiplier: 0.30  # Surviving banks hoard 70% more
+
+expected_indicators:
+  unsettled_banks: krisis
+  average_degree: krisis
+  tor: krisis
+  awd: siaga

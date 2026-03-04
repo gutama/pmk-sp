@@ -1,0 +1,22 @@
+name: baseline
+description: "Normal operating conditions — calibrated to historical Jan-25 to Jan-26 data"
+expected_zone: normal
+
+parameters:
+  # No modifications from default parameters
+  giro_reduction: 0.0
+  credit_facility_adjustment: 0.0
+  liquidity_hoarding_factor: 0.0
+  network_contraction: 0.0
+  infrastructure_degradation: 0.0
+
+agent_behavior:
+  payment_urgency_multiplier: 1.0
+  zone_timing_shift: 0.0           # No shift in payment timing
+  counterparty_reduction: 0.0
+
+expected_indicators:
+  tor: normal
+  average_degree: normal
+  system_availability: normal
+  unsettled_banks: normal

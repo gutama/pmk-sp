@@ -1,0 +1,20 @@
+name: liquidity_squeeze
+description: "Sudden reduction in interbank liquidity"
+expected_zone: siaga
+
+triggers:
+  giro_reduction: 0.30             # 30% drop in aggregate giro
+  credit_facility_cut: 0.50        # 50% reduction in intraday credit
+  onset_day: 5                     # Starts on day 5 of simulation
+  duration_days: 10
+
+agent_behavior:
+  payment_urgency_multiplier: 0.6  # Banks delay payments
+  zone_timing_shift: 0.15          # More payments shift to zona 3
+  liquidity_hoarding_factor: 0.40  # 40% more conservative
+
+expected_indicators:
+  tor: siaga                       # TOR meningkat (less buffer)
+  throughput_zona3: siaga          # Settlement terlambat
+  unsettled_banks: waspada         # Beberapa bank gagal settle
+  queue_ratio: waspada             # QR menurun (less queuing)

@@ -1,0 +1,20 @@
+name: cyber_incident
+description: "Cyber attack affecting participant connectivity"
+expected_zone: siaga
+
+triggers:
+  affected_banks_pct: 0.15         # 15% of banks affected
+  reconnection_time_hours: 4
+  data_integrity_impact: true
+  onset_day: 8
+
+cyber_effects:
+  reject_rate_increase: 0.20       # 20% additional rejection rate
+  processing_delay_factor: 2.5
+  authentication_failure_rate: 0.05
+
+expected_indicators:
+  reject_fast_dana: krisis
+  stability_index_participant_fast: siaga
+  avg_degree_fast: siaga
+  system_availability: waspada

@@ -1,0 +1,20 @@
+name: counterparty_withdrawal
+description: "Major bank reduces counterparty exposure"
+expected_zone: siaga
+
+triggers:
+  withdrawing_bank_tier: core      # A core bank withdraws
+  connection_reduction: 0.60       # Bank core mengurangi 60% koneksi
+  onset_day: 3
+  gradual_withdrawal: true         # Progressive over 5 days
+  withdrawal_days: 5
+
+agent_behavior:
+  network_contraction: 0.15        # Overall network becomes less connected
+  counterparty_reduction: 0.25     # Other banks also reduce counterparties
+
+expected_indicators:
+  average_degree: siaga
+  awd: siaga
+  avg_koneksi: waspada
+  volatility_interconnectedness: siaga

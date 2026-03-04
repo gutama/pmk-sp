@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+    background-color: #f5f5f5;
+    color: #1a1a1a;
+  }
+
+  /* Tabular numbers for data display */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  .risk-normal  { @apply bg-white text-gray-900; }
+  .risk-waspada { @apply bg-yellow-300 text-gray-900; }
+  .risk-siaga   { @apply bg-pink-500 text-white; }
+  .risk-krisis  { @apply bg-red-600 text-white; }
+
+  .risk-badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium;
+  }
+  .risk-badge-normal  { @apply bg-gray-100 text-gray-700; }
+  .risk-badge-waspada { @apply bg-yellow-100 text-yellow-800; }
+  .risk-badge-siaga   { @apply bg-pink-100 text-pink-800; }
+  .risk-badge-krisis  { @apply bg-red-100 text-red-800; }
+
+  .heatmap-cell {
+    @apply text-center text-xs font-medium tabular-nums py-2 px-2 border-b border-gray-200 transition-colors;
+    font-size: 11px;
+  }
+
+  .heatmap-header {
+    @apply text-white text-xs font-bold px-3 py-2;
+    font-size: 10px;
+  }
+
+  .section-header-primary {
+    background-color: #003366;
+    @apply heatmap-header;
+  }
+
+  .section-header-secondary {
+    background-color: #336699;
+    @apply heatmap-header;
+  }
+
+  .section-header-pmkt {
+    background-color: #8B6914;
+    @apply heatmap-header;
+  }
+}

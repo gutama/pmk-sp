@@ -1,0 +1,20 @@
+name: infrastructure_disruption
+description: "Partial system outage affecting settlement"
+expected_zone: siaga
+
+triggers:
+  outage_duration_minutes: 120
+  affected_channel: rtgs
+  degraded_throughput: 0.40        # 60% capacity reduction
+  onset_day: 7
+  onset_time_minutes: 600          # 10:00
+
+infrastructure:
+  max_capacity_reduction: 0.60     # Only 40% of normal capacity
+  processing_delay_multiplier: 3.0 # 3x slower processing
+
+expected_indicators:
+  system_availability: siaga
+  system_utilization: krisis
+  incidents: ">MTPD"
+  throughput_zona3: siaga
